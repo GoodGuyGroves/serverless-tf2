@@ -1,0 +1,14 @@
+{
+    "detail": {
+      "clusterArn": [
+        "${ecs_cluster_arn}"
+      ]
+    },
+    "detail-type": [
+      "ECS Task State Change",
+      "ECS Container Instance State Change"
+    ],
+    "source": [
+      "aws.ecs"
+    ]
+  }

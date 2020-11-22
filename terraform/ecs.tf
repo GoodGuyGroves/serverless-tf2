@@ -1,10 +1,10 @@
 resource "aws_ecs_cluster" "rsa_tf" {
   name               = "rsa_tf"
   capacity_providers = ["FARGATE_SPOT"]
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  }
+  # setting {
+  #   name  = "containerInsights"
+  #   value = "enabled"
+  # }
 }
 
 # Create a task definition - Defines a container configuration to be used to launch a container
@@ -28,57 +28,17 @@ resource "aws_ecs_task_definition" "tf2_server" {
       }
     }
   }
-  container_definitions = <<DEFINITION
-[
-  {
-    "cpu": 1024,
-    "essential": true,
-    "image": "cm2network/tf2:latest",
-    "memory": 2048,
-    "memoryReservation": 2048,
-    "name": "tf2",
-    "portMappings": [
-      {
-        "protocol": "tcp",
-        "containerPort": 27015,
-        "hostPort": 27015
-      },
-      {
-        "protocol": "udp",
-        "containerPort": 27015,
-        "hostPort": 27015
-      },
-      {
-        "protocol": "udp",
-        "containerPort": 27020,
-        "hostPort": 27020
-      }
-    ],    
-    "mountPoints": [
-      {
-        "containerPath": "/home/steam/tf2",
-        "sourceVolume": "tf2-efs",
-        "readOnly": false
-      }
-    ],
-    "environment": [
-      {"name": "SRCDS_TOKEN", "value": "355A206F51D7B1BD6AA365C798B082BF"},
-      {"name": "SRCDS_HOSTNAME", "value": "rsa.tf | Experiment #"},
-      {"name": "SRCDS_MAXPLAYERS", "value": "14"},
-      {"name": "SRCDS_REGION", "value": "7"},
-      {"name": "SRCDS_PW", "value": "games"}
-    ],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-region": "af-south-1",
-        "awslogs-group": "/ecs/tf2-logs",
-        "awslogs-stream-prefix": "tf2-server"
-      }
+  container_definitions = templatefile(
+    "json-defs/tf2-server.json",
+    { 
+      # srcds_token = aws_ssm_parameter.tf2_srcds_token.value
+      srcds_token = "355A206F51D7B1BD6AA365C798B082BF"
     }
-  }
-]
-DEFINITION
+  )
+
+  # depends_on = [
+  #   aws_ssm_parameter.tf2_srcds_token
+  # ]
 }
 
 # Create a Service - References a task definition to bring up a container based on a scaling group

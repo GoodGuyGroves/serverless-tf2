@@ -1,0 +1,72 @@
+service: serverless-gameservers
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: af-south-1
+  # environment:
+  #   SNS_TOPIC_ARN: ${ssm:/projects/cgc-etl/sns/dynamodb_alert_topic_arn}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Resource: "*"
+      Action:
+      - "*"
+    # - Effect: "Allow"
+    #   # Resource: ${ssm:/projects/serverless-gameservers/lambda/ECSEventHandler/arn}
+    #   # Resource: "arn:aws:ecs:af-south-1:639808537303:cluster/rsa_tf/*"
+    #   Resource: "arn:aws:ecs:*:*:*"
+    #   Action:
+    #   - ecs:*
+    # - Effect: "Allow"
+    #   Resource: "*"
+    #   Action:
+    #   - ec2:*
+    # - Effect: "Allow"
+    #   Action:
+    #   - dynamodb:Query
+    #   - dynamodb:Scan
+    #   - dynamodb:GetItem
+    #   - dynamodb:PutItem
+    #   - dynamodb:UpdateItem
+    #   - dynamodb:DeleteItem
+    #   Resource: ${ssm:/database/ecs/games/arn}
+    # - Effect: "Allow"
+    #   Action:
+    #   - dynamodb:GetRecords
+    #   - dynamodb:GetShardIterator
+    #   - dynamodb:DescribeStream
+    #   - dynamodb:ListStreams
+    #   Resource: ${ssm:/projects/cgc-etl/dynamodb/stream_arn}
+    # - Effect: "Allow"
+    #   Action:
+    #   - SNS:Publish
+    #   Resource: ${ssm:/projects/cgc-etl/sns/dynamodb_alert_topic_arn}
+
+functions:
+  ECSEventHandler:
+    handler: ecs_event_handler.event_handler
+  ECSCreateServer:
+    handler: ecs_create_server.create_server
+    # layers:
+    #   - arn:aws:lambda:${self:provider.region}:392341123054:layer:AWSLambda-Python38-SciPy1x:26
+    #   - {Ref: PandasLambdaLayer}
+
+resources:
+  Resources:
+    ECSEventHandlerArnParameter:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: /projects/serverless-gameservers/lambda/ECSEventHandler/arn
+        Type: String
+        Value: !GetAtt [ ECSEventHandlerLambdaFunction, Arn ]
+        Description: The ARN of my ECSEventHandler Lambda function
+    ECSCreateServerArnParameter:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: /projects/serverless-gameservers/lambda/ECSCreateServer/arn
+        Type: String
+        Value: !GetAtt [ ECSCreateServerLambdaFunction, Arn ]
+        Description: The ARN of my ECSCreateServer Lambda function

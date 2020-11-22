@@ -1,0 +1,64 @@
+[
+    {
+        "cpu": 1024,
+        "essential": true,
+        "image": "639808537303.dkr.ecr.af-south-1.amazonaws.com/rsatf-tf2:latest",
+        "memory": 2048,
+        "memoryReservation": 2048,
+        "name": "tf2",
+        "portMappings": [
+            {
+                "protocol": "tcp",
+                "containerPort": 27015,
+                "hostPort": 27015
+            },
+            {
+                "protocol": "udp",
+                "containerPort": 27015,
+                "hostPort": 27015
+            },
+            {
+                "protocol": "udp",
+                "containerPort": 27020,
+                "hostPort": 27020
+            }
+        ],
+        "mountPoints": [
+            {
+                "containerPath": "/home/steam/tf",
+                "sourceVolume": "tf2-efs",
+                "readOnly": false
+            }
+        ],
+        "environment": [
+            {
+                "name": "SRCDS_TOKEN",
+                "value": "${srcds_token}"
+            },
+            {
+                "name": "SRCDS_HOSTNAME",
+                "value": "rsa.tf | Experiment #"
+            },
+            {
+                "name": "SRCDS_MAXPLAYERS",
+                "value": "14"
+            },
+            {
+                "name": "SRCDS_REGION",
+                "value": "7"
+            },
+            {
+                "name": "SRCDS_PW",
+                "value": "games"
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-region": "af-south-1",
+                "awslogs-group": "/ecs/tf2-logs",
+                "awslogs-stream-prefix": "tf2-server"
+            }
+        }
+    }
+]

@@ -1,0 +1,80 @@
+{
+    "NetworkInterfaces": [
+        {
+            "Association": {
+                "IpOwnerId": "amazon",
+                "PublicDnsName": "ec2-13-244-151-255.af-south-1.compute.amazonaws.com",
+                "PublicIp": "13.244.151.255"
+            },
+            "Attachment": {
+                "AttachTime": datetime.datetime(2020,
+                11,
+                18,
+                16,
+                36,
+                38, tzinfo=tzlocal()),
+                "AttachmentId": "eni-attach-08a05f368eec069ca",
+                "DeleteOnTermination": False,
+                "DeviceIndex": 1,
+                "InstanceOwnerId": "265582471495",
+                "Status": "attached"
+            },
+            "AvailabilityZone": "af-south-1a",
+            "Description": "arn:aws:ecs:af-south-1: 639808537303:attachment/761313d3-6a34-4ea3-8ff4-bde51156f616",
+            "Groups": [
+                {
+                    "GroupName": "tf2-security-group",
+                    "GroupId": "sg-0838e5a4a93ec01b0"
+                }
+            ],
+            "InterfaceType": "interface",
+            "Ipv6Addresses": [],
+            "MacAddress": "06:ab:e3: 54: 04:a2",
+            "NetworkInterfaceId": "eni-033d63da27bc68b2f",
+            "OwnerId": "639808537303",
+            "PrivateDnsName": "ip-10-0-1-171.af-south-1.compute.internal",
+            "PrivateIpAddress": "10.0.1.171",
+            "PrivateIpAddresses": [
+                {
+                    "Association": {
+                        "IpOwnerId": "amazon",
+                        "PublicDnsName": "ec2-13-244-151-255.af-south-1.compute.amazonaws.com",
+                        "PublicIp": "13.244.151.255"
+                    },
+                    "Primary": True,
+                    "PrivateDnsName": "ip-10-0-1-171.af-south-1.compute.internal",
+                    "PrivateIpAddress": "10.0.1.171"
+                }
+            ],
+            "RequesterId": "372510074184",
+            "RequesterManaged": True,
+            "SourceDestCheck": True,
+            "Status": "in-use",
+            "SubnetId": "subnet-0a98dc0cecd8268a3",
+            "TagSet": [
+                {
+                    "Key": "aws:ecs:clusterName",
+                    "Value": "rsa_tf"
+                },
+                {
+                    "Key": "game_type",
+                    "Value": "tf2"
+                }
+            ],
+            "VpcId": "vpc-08e13a204ede421f5"
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "88f3dd96-0b4a-44ab-b5e1-107aacfbd8f7",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "88f3dd96-0b4a-44ab-b5e1-107aacfbd8f7",
+            "content-type": "text/xml;charset=UTF-8",
+            "content-length": "3099",
+            "vary": "accept-encoding",
+            "date": "Wed,
+            18 Nov 2020 16: 36: 45 GMT", "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}

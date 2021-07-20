@@ -1,0 +1,95 @@
+{
+    "version": "0",
+    "id": "f355c83b-dc47-c6df-1e61-78c8dcd67c10",
+    "detail-type": "ECS Task State Change",
+    "source": "aws.ecs",
+    "account": "639808537303",
+    "time": "2020-11-18T16:34:31Z",
+    "region": "af-south-1",
+    "resources": [
+        "arn:aws:ecs:af-south-1:639808537303:task/rsa_tf/bac575ae5ac74c75a8bff15f6e003767"
+    ],
+    "detail": {
+        "attachments": [
+            {
+                "id": "ed56761f-f215-4a61-a739-13f1b861aec2",
+                "type": "eni",
+                "status": "ATTACHED",
+                "details": [
+                    {
+                        "name": "subnetId",
+                        "value": "subnet-0a98dc0cecd8268a3"
+                    },
+                    {
+                        "name": "networkInterfaceId",
+                        "value": "eni-09de83e828486988f"
+                    },
+                    {
+                        "name": "macAddress",
+                        "value": "06:0f:04:84:f1:ce"
+                    },
+                    {
+                        "name": "privateDnsName",
+                        "value": "ip-10-0-1-122.af-south-1.compute.internal"
+                    },
+                    {
+                        "name": "privateIPv4Address",
+                        "value": "10.0.1.122"
+                    }
+                ]
+            }
+        ],
+        "availabilityZone": "af-south-1a",
+        "capacityProviderName": "FARGATE_SPOT",
+        "clusterArn": "arn:aws:ecs:af-south-1:639808537303:cluster/rsa_tf",
+        "containers": [
+            {
+                "containerArn": "arn:aws:ecs:af-south-1:639808537303:container/8991ade8-fd52-4dd0-bfd0-345209710efe",
+                "lastStatus": "PENDING",
+                "name": "tf2",
+                "image": "639808537303.dkr.ecr.af-south-1.amazonaws.com/rsatf-tf2:latest",
+                "taskArn": "arn:aws:ecs:af-south-1:639808537303:task/rsa_tf/bac575ae5ac74c75a8bff15f6e003767",
+                "networkInterfaces": [
+                    {
+                        "attachmentId": "ed56761f-f215-4a61-a739-13f1b861aec2",
+                        "privateIpv4Address": "10.0.1.122"
+                    }
+                ],
+                "cpu": "1024",
+                "memory": "2048",
+                "memoryReservation": "2048"
+            }
+        ],
+        "cpu": "1024",
+        "createdAt": "2020-11-18T16:34:22.796Z",
+        "desiredStatus": "STOPPED",
+        "group": "tf2-server",
+        "launchType": "FARGATE",
+        "lastStatus": "PROVISIONING",
+        "memory": "2048",
+        "overrides": {
+            "containerOverrides": [
+                {
+                    "environment": [
+                        {
+                            "name": "SRCDS_HOSTNAME",
+                            "value": "rsa.tf | Experiment #3"
+                        }
+                    ],
+                    "cpu": 1,
+                    "memory": 2048,
+                    "memoryReservation": 2048,
+                    "name": "tf2"
+                }
+            ]
+        },
+        "platformVersion": "1.4.0",
+        "stoppingAt": "2020-11-18T16:34:31.216Z",
+        "stoppedReason": "Task stopped by user",
+        "stopCode": "UserInitiated",
+        "taskArn": "arn:aws:ecs:af-south-1:639808537303:task/rsa_tf/bac575ae5ac74c75a8bff15f6e003767",
+        "taskDefinitionArn": "arn:aws:ecs:af-south-1:639808537303:task-definition/tf2-server:15",
+        "updatedAt": "2020-11-18T16:34:31.216Z",
+        "version": 2
+    }
+}
